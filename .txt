@@ -1,0 +1,13 @@
+Instalação
+-- back
+npm init -y
+npm install express
+npm install mysql - banco de dados 
+npm install cors
+npm install nodemon -D - rodar o servidor
+
+npx create-react-app (nome-da-aplicacao)
+npm install axios
+npm install react-router-dom
+npm install react-bootstrap-icons
+npm install react-helmet-async - titulo
