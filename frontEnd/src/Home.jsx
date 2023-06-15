@@ -10,9 +10,20 @@ function Home() {
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  // delete
+  const handleDelete = (id) => {
+    axios
+      .delete("http://localhost:5432/" + id)
+      .then((res) => {
+        location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+      <div className="w-150 bg-white rounded p-3">
         <h2>Lista de Estudante</h2>
         <div className="d-flex justify-content-end">
           <Link to="/cadastro" className="btn btn-success">
@@ -50,7 +61,12 @@ function Home() {
                     >
                       Editar
                     </Link>
-                    <button className="btn btn-sm btn-danger">Deletar</button>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(estudante.id)}
+                    >
+                      Deletar
+                    </button>
                   </td>
                 </tr>
               );
