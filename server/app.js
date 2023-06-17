@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 // conecção banco de dados
 const db = mysql.createConnection({
-  user: "root",
-  password: "",
-  host: "http://127.0.0.1:",
-  database: "estudante",
+  mysql_user: "root",
+  mysql_password: "",
+  mysql_host: "http://127.0.0.1:",
+  mysql_database: "estudante",
 });
 
 // rota de leitura
