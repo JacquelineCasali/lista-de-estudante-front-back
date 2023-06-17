@@ -10,7 +10,7 @@ app.use(express.json());
 const db = mysql.createConnection({
   user: "root",
   password: "",
-  host: "localhost",
+  // host: "localhost",
   database: "estudante",
 });
 
@@ -43,6 +43,26 @@ app.get("/:id", (req, res) => {
   });
 });
 
+// editar
+app.put("/edit/:id", (req, res) => {
+  const sql = "UPDATE estudante SET `name`=?,`email`=? WHERE id=?";
+  const id = req.params.id;
+  db.query(sql, [req.body.name, req.body.email, id], (err, result) => {
+    if (err) return res.json({ Message: "Error ao iniciar servidor" });
+    return res.json(result);
+  });
+});
+
+// deletar
+app.delete("/:id", (req, res) => {
+  const sql = "DELETE FROM `estudante` WHERE id=?";
+
+  const id = req.params.id;
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Message: "Error ao iniciar servidor" });
+    return res.json(result);
+  });
+});
 // // listando os pets
 app.listen(PORT, () => {
   console.log("Estamos rodando em: http://localhost:" + PORT);
