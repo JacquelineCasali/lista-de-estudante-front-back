@@ -16,7 +16,7 @@ https://lista-de-estudante-react-php.vercel.app/
 
 ## Repositorio do Projeto
 
-https://github.com/JacquelineCasali/lista-de-estudante-react-php
+https://github.com/JacquelineCasali/lista-de-estudante-front-back.git
 
 ## Instalação
 
@@ -28,9 +28,10 @@ https://github.com/JacquelineCasali/lista-de-estudante-react-php
 
 ## BackEnd
 
-Change your mySQL database data `server/app.js`
+Database data `server/app.js`
 `$ cd server`
 `$ npm install`
+`$ npm install cors`
 `$ npm start`
 
 ## BackEnd
@@ -51,6 +52,6 @@ Change your mySQL database data `server/app.js`
 ### Back-end
 
 - `express`
-- `mysql`
+- `postgres`
 - `nodemon`
 - `cors`

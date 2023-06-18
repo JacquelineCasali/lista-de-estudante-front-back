@@ -26,7 +26,7 @@ function Editar() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put("https://lista-hesh.onrender.com/edit" + id, values)
+      .put("https://lista-hesh.onrender.com/edit/" + id, values)
       .then((res) => {
         console.log(res);
         navigate("/");
