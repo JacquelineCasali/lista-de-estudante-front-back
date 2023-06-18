@@ -7,7 +7,7 @@ function Ler() {
   useEffect(() => {
     //  banco de dados
     axios
-      .get("http://localhost:5432/" + id)
+      .get("https://lista-hesh.onrender.com/" + id)
       .then((res) => {
         console.log(res);
 

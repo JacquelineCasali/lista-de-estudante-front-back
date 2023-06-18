@@ -1,8 +1,6 @@
 import express from "express";
 import cors from "cors";
-
 import bodyParser from "body-parser";
-// import { Pool } from "pg";
 import pkg from "pg";
 import "dotenv/config";
 const { Pool } = pkg;
@@ -18,12 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
 });
-// const db = mysql.createConnection({
-//   user: "root",
-//   password: "",
-//   host: "127.0.0.1",
-//   database: "estudante",
-// });
 
 // rota de leitura
 app.get("/", async (req, res) => {
@@ -34,54 +26,61 @@ app.get("/", async (req, res) => {
     return res.status(400).send(err);
   }
 }),
-  // app.get("/", async (req, res) => {
-  //   const sql = "SELECT * FROM estudante";
-  //   await pool.query(sql, (err, result) => {
-  //     if (err) return res.json({ Message: "Error ao iniciar servidor" });
-  //     return res.json(result);
-  //   });
-  // });
   // cadastrar estudante
-  // app.post("/estudante", (req, res) => {
-  //   const sql = "INSERT INTO estudante(`name`,`email`) VALUES (?) ";
-  //   console.log(req.body);
-  //   const values = [req.body.name, req.body.email];
-  //   db.query(sql, [values], (err, result) => {
-  //     if (err) return res.json(err);
-  //     return res.status(200).send({ msg: "Estudante Cadastrado com sucesso " });
-  //   });
-  // });
+  app.post("/", async (req, res) => {
+    const { name } = req.body;
+    const { email } = req.body;
+    try {
+      await pool.query(
+        "INSERT INTO estudante(name, email) VALUES ($1,$2) RETURNING * ",
+        [name, email]
+      );
+      return res.status(200).send({ msg: "Estudante cadastrado com sucesso " });
+    } catch (err) {
+      return res.status(400).send({ msg: "Estudante já cadastrado " });
+    }
+  }),
+  // ler um estudante
+  app.get("/:id", async (req, res) => {
+    const { id } = req.params;
 
-  // // ler um estudante
-  // app.get("/:id", (req, res) => {
-  //   const sql = "SELECT * FROM estudante WHERE id=?";
-  //   const id = req.params.id;
-  //   db.query(sql, [id], (err, result) => {
-  //     if (err) return res.json({ Message: "Error ao iniciar servidor" });
-  //     return res.json(result);
-  //   });
-  // });
+    try {
+      const { rows } = await pool.query(
+        "SELECT * FROM estudante WHERE id=($1)",
+        [id]
+      );
+      return res.status(200).send(rows);
+    } catch (err) {
+      return res.status(400).json({ Message: "Error ao iniciar servidor" });
+    }
+  }),
+  // editar
+  app.put("/edit/:id", async (req, res) => {
+    const { id } = req.params;
+    const { name, email } = req.body;
 
-  // // editar
-  // app.put("/edit/:id", (req, res) => {
-  //   const sql = "UPDATE estudante SET `name`=?,`email`=? WHERE id=?";
-  //   const id = req.params.id;
-  //   db.query(sql, [req.body.name, req.body.email, id], (err, result) => {
-  //     if (err) return res.json({ Message: "Error ao iniciar servidor" });
-  //     return res.json(result);
-  //   });
-  // });
+    try {
+      await pool.query(
+        "UPDATE estudante SET name=($1), email=($2) WHERE id=($3) RETURNING * ",
+        [name, email, id]
+      );
+      return res.status(200).send({ msg: "Estudante atulizado com sucesso " });
+    } catch (err) {
+      return res.status(400).send({ msg: "Estudante já cadastrado " });
+    }
+  }),
+  // deletar
 
-  // // deletar
-  // app.delete("/:id", (req, res) => {
-  //   const sql = "DELETE FROM `estudante` WHERE id=?";
+  app.delete("/:id", async (req, res) => {
+    const { id } = req.params;
 
-  //   const id = req.params.id;
-  //   db.query(sql, [id], (err, result) => {
-  //     if (err) return res.json({ Message: "Error ao iniciar servidor" });
-  //     return res.json(result);
-  //   });
-  // });
+    try {
+      await pool.query("DELETE FROM estudante WHERE id=($1)", [id]);
+      return res.status(200).send({ msg: "Estudante  Deletado com sucesso " });
+    } catch (err) {
+      return res.status(400).send(err);
+    }
+  }),
   // // listando os pets
   app.listen(PORT, () => {
     console.log("Estamos rodando em: http://localhost:" + PORT);

@@ -8,7 +8,7 @@ function Editar() {
     // puxando dados do banco
     //  banco de dados
     axios
-      .get("http://localhost:5432/" + id)
+      .get(["https://lista-hesh.onrender.com/" + id])
       .then((res) => {
         console.log(res);
 
@@ -26,7 +26,7 @@ function Editar() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:5432/edit/" + id, values)
+      .put(["https://lista-hesh.onrender.com/" + id, values])
       .then((res) => {
         console.log(res);
         navigate("/");

@@ -6,7 +6,7 @@ function Home() {
   useEffect(() => {
     // axios.get('https://estudante-php.onrender.com/')
     axios
-      .get("http://localhost:5432/", "https://lista-hesh.onrender.com/")
+      .get(["https://lista-hesh.onrender.com/"])
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -14,7 +14,7 @@ function Home() {
   // delete
   const handleDelete = (id) => {
     axios
-      .delete("http://localhost:5432/" + id)
+      .delete("https://lista-hesh.onrender.com/" + id)
       .then((res) => {
         location.reload();
       })

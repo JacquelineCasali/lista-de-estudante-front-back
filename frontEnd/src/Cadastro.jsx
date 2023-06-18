@@ -13,7 +13,7 @@ function Cadastro() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(["http://localhost:5432/estudante"], values)
+      .post("https://lista-hesh.onrender.com/", values)
       .then((res) => {
         console.log(res);
         navigate("/");
