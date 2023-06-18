@@ -1,7 +1,5 @@
 import express from "express";
 import cors from "cors";
-// import mysql from "mysql";
-// import { Pool } from "pg";
 
 import bodyParser from "body-parser";
 // import { Pool } from "pg";
@@ -30,7 +28,7 @@ const pool = new Pool({
 // rota de leitura
 app.get("/", async (req, res) => {
   try {
-    const { rows } = await pool.query("SELECT * FROM pets");
+    const { rows } = await pool.query("SELECT * FROM estudante");
     return res.status(200).send(rows);
   } catch (err) {
     return res.status(400).send(err);
