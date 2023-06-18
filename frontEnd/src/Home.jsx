@@ -6,7 +6,7 @@ function Home() {
   useEffect(() => {
     // axios.get('https://estudante-php.onrender.com/')
     axios
-      .get("http://localhost:5432/")
+      .get("http://localhost:5432/", "https://lista-hesh.onrender.com/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
