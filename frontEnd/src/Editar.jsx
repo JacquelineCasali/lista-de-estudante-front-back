@@ -8,11 +8,21 @@ function Editar() {
     // puxando dados do banco
     //  banco de dados
     axios
-      .get("http://localhost:3000/" + id)
+      .get("https://lista-hesh.onrender.com/" + id)
       .then((res) => {
         console.log(res);
+  //postgrell
+  setValues(res.data[0])
 
-        setValues(res.data);
+  //mysql
+       // setValues(res.data);
+   
+  
+   
+    //setEstudante(res.data)
+
+
+
       })
       .catch((err) => console.log(err));
   }, []);
@@ -26,7 +36,7 @@ function Editar() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:3000/" + id, values)
+      .put("https://lista-hesh.onrender.com/" + id, values)
       .then((res) => {
         console.log(res);
         navigate("/");

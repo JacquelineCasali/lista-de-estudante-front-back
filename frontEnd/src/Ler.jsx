@@ -9,7 +9,10 @@ function Ler() {
   axios.get('https://lista-hesh.onrender.com/'+id)
 .then(res=>
   {
-    setEstudante(res.data)
+    //postgrell
+    setEstudante(res.data[0])
+    //mysql
+    //setEstudante(res.data)
     console.log(res)
   }
   )
