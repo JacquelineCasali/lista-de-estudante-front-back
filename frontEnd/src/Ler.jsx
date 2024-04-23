@@ -23,7 +23,7 @@ function Ler() {
         <div className="p-2">
           <h2>Detalhe Estudante</h2>
           <h2>{estudante.id}</h2>
-          <h2>{estudante.nome}</h2>
+          <h2>{estudante.name}</h2>
           <h2>{estudante.email}</h2>
         </div>
         <Link to="/" className="btn btn-primary me-2">

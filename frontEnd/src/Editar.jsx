@@ -18,7 +18,7 @@ function Editar() {
   }, []);
   const [message,setMessage]=useState('');
   const [values, setValues] = useState({
-    nome: "",
+    name: "",
     email: "",
   });
   //  editar
@@ -57,8 +57,8 @@ function Editar() {
               type="text"
               placeholder="Digite o nome"
               //   monstrando na tela
-              value={values.nome}
-              onChange={(e) => setValues({ ...values, nome: e.target.value })}
+              value={values.name}
+              onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
           </div>
           <div className="mb-2">

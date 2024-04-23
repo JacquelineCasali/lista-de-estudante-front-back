@@ -13,14 +13,14 @@ function Cadastro() {
   };
   // criar cadastro
   const [values, setValues] = useState({
-    nome: "",
+    name: "",
     email: "",
   });
   const navigate = useNavigate();
   const [message,setMessage]=useState('');
   const handleValidation = () => {
-    const {nome,email  } = values;
-    if (nome === "") {
+    const {name,email  } = values;
+    if (name === "") {
       //campo nao pode ser vazio
       toast.error("Por favor, preencha seu nome", toastOptions);
       return false;
@@ -66,7 +66,7 @@ function Cadastro() {
               className="form-control"
               type="text"
               placeholder="Digite o nome"
-              onChange={(e) => setValues({ ...values, nome: e.target.value })}
+              onChange={(e) => setValues({ ...values, name: e.target.value })}
             />
           </div>
           <div className="mb-2">
