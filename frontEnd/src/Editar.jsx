@@ -8,17 +8,17 @@ function Editar() {
     // puxando dados do banco
     //  banco de dados
     axios
-      .get("https://lista-hesh.onrender.com/" + id)
+      .get("http://localhost:3000/" + id)
       .then((res) => {
         console.log(res);
 
-        setValues(res.data[0]);
+        setValues(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
-
+  const [message,setMessage]=useState('');
   const [values, setValues] = useState({
-    name: "",
+    nome: "",
     email: "",
   });
   //  editar
@@ -26,19 +26,29 @@ function Editar() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put("https://lista-hesh.onrender.com/edit/" + id, values)
+      .put("http://localhost:3000/" + id, values)
       .then((res) => {
         console.log(res);
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setMessage(err.response.data.message)
+      
+      );
   };
 
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
       <div className="w-50 bg-white rounded p-3">
+      {
+      
+      message?<p>
+          
+          {message}</p>: ""}
+        
         <form onSubmit={handleUpdate}>
           <h2>Editar Estudante</h2>
+         
+         
           <div className="mb-2">
             <label htmlFor="">Nome:</label>
 
@@ -47,8 +57,8 @@ function Editar() {
               type="text"
               placeholder="Digite o nome"
               //   monstrando na tela
-              value={values.name}
-              onChange={(e) => setValues({ ...values, name: e.target.value })}
+              value={values.nome}
+              onChange={(e) => setValues({ ...values, nome: e.target.value })}
             />
           </div>
           <div className="mb-2">

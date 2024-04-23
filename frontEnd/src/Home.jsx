@@ -45,7 +45,7 @@ function Home() {
               return (
                 <tr key={index}>
                   <td>{estudante.id}</td>
-                  <td>{estudante.name}</td>
+                  <td>{estudante.nome}</td>
                   <td>{estudante.email}</td>
                   <td>
                     <Link

@@ -6,14 +6,16 @@ function Ler() {
   const [estudante, setEstudante] = useState([]);
   useEffect(() => {
     //  banco de dados
-    axios
-      .get("https://lista-hesh.onrender.com/" + id)
-      .then((res) => {
-        console.log(res);
-
-        setEstudante(res.data[0]);
-      })
-      .catch((err) => console.log(err));
+  axios.get('https://lista-hesh.onrender.com/'+id)
+.then(res=>
+  {
+    setEstudante(res.data)
+    console.log(res)
+  }
+  )
+.catch(err=>console.log(err))
+  
+   
   }, []);
   return (
     <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
@@ -21,7 +23,7 @@ function Ler() {
         <div className="p-2">
           <h2>Detalhe Estudante</h2>
           <h2>{estudante.id}</h2>
-          <h2>{estudante.name}</h2>
+          <h2>{estudante.nome}</h2>
           <h2>{estudante.email}</h2>
         </div>
         <Link to="/" className="btn btn-primary me-2">
