@@ -35,9 +35,9 @@ app.get("/", async (req, res) => {
         "INSERT INTO estudante(name, email) VALUES ($1,$2) RETURNING * ",
         [name, email]
       );
-      return res.status(200).send({ msg: "Estudante cadastrado com sucesso " });
+      return res.status(200).send({ message: "Estudante cadastrado com sucesso " });
     } catch (err) {
-      return res.status(400).send({ msg: "Estudante já cadastrado " });
+      return res.status(400).send({ message: "Estudante já cadastrado " });
     }
   }),
   // ler um estudante
@@ -55,7 +55,7 @@ app.get("/", async (req, res) => {
     }
   }),
   // editar
-  app.put("/edit/:id", async (req, res) => {
+  app.put("/:id", async (req, res) => {
     const { id } = req.params;
     const { name, email } = req.body;
 
